@@ -26,14 +26,15 @@ def rayleigh_range(w0, wavelambda):
     return pi*w0*w0/wavelambda
 
 
-def gaussian_beam(x, y, z, E0, zR, w0, k):
+def gaussian_beam(x, y, z, E0, wavelambda, w0, k):
     """full gaussian beam at x, y, z given the beam parameters\n
     E0 is the electric field amplitude
-    zR is the raleigh range
+    wavelambda is the wavelength
     w0 is the beam waist (1/e field radius and 1/e^2 intensity radius)
     k is a tuple of [kx,ky,kz]"""
 
     r = sqrt(x*x + y*y)
+    zR = rayleigh_range(w0, wavelambda)
     w = spot_size(z, zR, w0)
     R = radius_curvature(z, zR)
     eta = guoy_phase(z, zR)
